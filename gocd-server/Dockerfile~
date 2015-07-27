@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y -q unzip openjdk-7-jre-headless git
 RUN echo Pacific/Samoa > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN mkdir /etc/service/go-server
-ADD go-common-scripts.sh /etc/service/go-server/go-common-scripts.sh
-ADD go-server-start.sh /etc/service/go-server/run
+ADD gocd-server/go-common-scripts.sh /etc/service/go-server/go-common-scripts.sh
+ADD gocd-server/go-server-start.sh /etc/service/go-server/run
 
 ADD http://download.go.cd/local/15.1.0-1732/go-server-15.1.0-1732.deb /tmp/go-server.deb
 
