@@ -1,8 +1,5 @@
-# Build using: docker build -f Dockerfile.gocd-agent -t gocd-agent:15.1.0 .
-#FROM melinite/oracle-java8-jdk:latest
 FROM philcryer/min-jessie-jre8
-MAINTAINER Aravind SV <arvind.sv@gmail.com>
-
+MAINTAINER John Klingler <jfklingler@gmail.com>
 
 ADD go-agent-start.sh /etc/service/go-agent/run
 ADD http://download.go.cd/gocd-deb/go-agent-15.2.0-2248.deb /tmp/go-agent.deb
@@ -19,5 +16,7 @@ RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh && \
     dpkg -i /tmp/go-agent.deb && \
     sed -i -e 's/DAEMON=Y/DAEMON=N/' /etc/default/go-agent /etc/default/go-agent && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV JAVA_HOME=/usr/java/jre1.8.0_31
 
 CMD ["/etc/service/go-agent/run"]
